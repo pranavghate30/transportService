@@ -1,0 +1,66 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Add A Ride</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="rideForm" class="padding-left-30">
+            <div>
+                <mat-form-field>
+                    <mat-label>Vehicle Type</mat-label>
+                    <mat-select required name="type" formControlName="vehicleType" (selectionChange)=changeSeats()>
+                        <mat-option *ngFor="let type of types" [value]="type">
+                            {{type}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Vehicle No</mat-label>
+                    <input required matInput formControlName="vehicleNo">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Vecant Seats</mat-label>
+                    <mat-select required name="type" formControlName="vecantSeats">
+                        <mat-option *ngFor="let seat of seats" [value]="seat">
+                            {{seat}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Hour</mat-label>
+                    <input required type="number" min="1" max="24" matInput formControlName="hour">
+                </mat-form-field>
+                <span class="padding-left-10">:</span>
+                <mat-form-field>
+                    <mat-label>Min</mat-label>
+                    <input required type="number" min="1" max="60" class="padding-left-10" matInput
+                        formControlName="min">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>PickUp Point</mat-label>
+                    <input required matInput formControlName="pickUpPoint">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Destination</mat-label>
+                    <input required matInput formControlName="destination">
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button class="float-right" [disabled]="rideForm.invalid" (click)="addRide()">Add
+            Ride</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card>
+
+</mat-card>

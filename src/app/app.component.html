@@ -1,0 +1,35 @@
+<mat-toolbar>
+    <img src="../assets/infrrdLogo.png" width="30px" height="30px" />
+    Infrrd Transport
+    <button mat-raised-button class="margin-left-80" *ngIf="(type === 'Give'||type === 'Get') && employeeFound"
+        (click)="logout()">
+        Logout
+    </button>
+</mat-toolbar>
+<mat-card *ngIf="type === '' && employeeFound === false">
+    <mat-card-header>
+        <mat-card-title>What are you looking for?</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="padding-left-15">
+        <div>
+            <mat-form-field>
+                <mat-label>Employee ID</mat-label>
+                <input type="number" required matInput [formControl]="empId">
+            </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" (click)="login('Give')"
+            [disabled]='empId.invalid'>
+            Give Ride
+        </button>
+        <button mat-raised-button class="margin-left-20" [disabled]='empId.invalid' (click)="login('Get')">
+            Get Ride
+        </button>
+    </mat-card-content>
+    <div *ngIf="!employeeFound && type!==''">
+        EmployeeId dosent exist please enter correct ID
+    </div>
+</mat-card>
+<app-add-ride *ngIf="type === 'Give' && employeeFound"></app-add-ride>
+<app-show-all-rides *ngIf="type === 'Get' && employeeFound"></app-show-all-rides>
+
+<!--<router-outlet></router-outlet>-->
