@@ -1,8 +1,8 @@
 <div class="container">
   <label for="employeeId"><b>Employee ID </b><span style="color: red">*</span></label>
   <input type="text" placeholder="Enter Employee ID" name="employeeId" [formControl]="empId" required>
-  <div class="errorMsg" *ngIf="noEmployeeFound">
-    EmployeeId id dose not exist, please enter correct ID
+  <div class="errorMsg" *ngIf="empId.touched && empId.hasError('wrongId') && empId.value !== ''">
+    {{empId.errors && empId.errors.wrongId?empId.errors.wrongId.errMsg:''}}
   </div>
   <div class="errorMsg" *ngIf="empId.touched && empId.hasError('required')">
     Please enter EmployeeId.
