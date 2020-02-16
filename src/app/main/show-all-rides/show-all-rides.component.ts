@@ -63,7 +63,7 @@ export class ShowAllRidesComponent implements OnInit {
       this.allRides[index].vecantSeats = this.allRides[index].vecantSeats - 1;
     }
     localStorage.removeItem('RideDetails');
-    sessionStorage.getItem('RideDetails', JSON.stringify(this.allRides));
+    localStorage.setItem('RideDetails', JSON.stringify(this.allRides));
     sessionStorage.removeItem('loggedInUser');
     sessionStorage.setItem('loggedInUser', JSON.stringify(this.loggedUser));
   }
