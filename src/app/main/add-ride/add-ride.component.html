@@ -1,0 +1,135 @@
+<div class="BookedRides">
+  <div class="cardTitle">
+    Add New Ride:
+  </div>
+  <form [formGroup]="rideForm">
+    <div class="formFieldContainer">
+      <label for="vehicleNo"><b>Vehicle Type</b><span style="color: red">*</span></label>
+      <select id="vehicleNo" name="vehicleNo" formControlName="vehicleType" (change)="changeSeats()" required>
+        <option *ngFor="let type of types" [value]="type">{{type}}</option>
+      </select>
+      <div class="errorMsg"
+           *ngIf="rideForm.controls.vehicleType.touched && rideForm.controls.vehicleType.hasError('required')">
+        Please select vehicle type.
+      </div>
+    </div>
+    <div class="formFieldContainer">
+      <label for="vehicleNo"><b>Vehicle No </b><span style="color: red">*</span></label>
+      <input type="text" placeholder="eg: KA 23 A 2345" name="vehicleNo" formControlName="vehicleNo" required>
+      <div class="errorMsg"
+           *ngIf="rideForm.controls.vehicleNo.touched && rideForm.controls.vehicleNo.hasError('required')">
+        Please enter Vehicle No.
+      </div>
+    </div>
+    <div class="formFieldContainer">
+      <label for="vecantSeats"><b>Seats Available</b></label>
+      <select id="vecantSeats" name="vecantSeats" formControlName="vecantSeats">
+        <option *ngFor="let seat of seats" [value]="seat">{{seat}}</option>
+      </select>
+      <div class="errorMsg"
+           *ngIf="rideForm.controls.vecantSeats.touched && rideForm.controls.vecantSeats.hasError('required')">
+        Please select available seats.
+      </div>
+    </div>
+    <div class="formFieldContainer">
+      <label for="hour"><b>Hour</b><span style="color: red">*</span></label>
+      <input type="number" placeholder="24 hour format" name="hour" formControlName="hour" required>
+      <div class="errorMsg" *ngIf="rideForm.controls.hour.touched && rideForm.controls.hour.hasError('required')">
+        Please enter Hour
+      </div>
+    </div>
+    <div class="formFieldContainer">
+      <label for="min"><b>Minuit</b><span style="color: red">*</span></label>
+      <input type="number" placeholder="0 to 60" name="min" formControlName="min" required>
+      <div class="errorMsg" *ngIf="rideForm.controls.min.touched && rideForm.controls.min.hasError('required')">
+        Please enter Minuits
+      </div>
+    </div>
+    <div class="formFieldContainer">
+      <label for="pickUpPoint"><b>Pickup Point</b><span style="color: red">*</span></label>
+      <input type="text" placeholder="HSR" name="pickUpPoint" formControlName="pickUpPoint" required>
+      <div class="errorMsg"
+           *ngIf="rideForm.controls.pickUpPoint.touched && rideForm.controls.pickUpPoint.hasError('required')">
+        Please enter pick up point
+      </div>
+    </div>
+    <div class="formFieldContainer">
+      <label for="pickUpPoint"><b>Destination</b><span style="color: red">*</span></label>
+      <input type="text" placeholder="HSR" name="destination" formControlName="destination" required>
+      <div class="errorMsg"
+           *ngIf="rideForm.controls.destination.touched && rideForm.controls.destination.hasError('required')">
+        Please enter destination
+      </div>
+    </div>
+  </form>
+  <button class="addRideButton" [disabled]="rideForm.invalid" (click)="addRide()"> Add Ride</button>
+</div>
+
+
+<!--<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add A Ride</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="padding-left-30">
+      <div>
+        <mat-form-field>
+          <mat-label>Vehicle Type</mat-label>
+          <mat-select required name="type" formControlName="vehicleType" (selectionChange)=changeSeats()>
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Vehicle No</mat-label>
+          <input required matInput formControlName="vehicleNo">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Vecant Seats</mat-label>
+          <mat-select required name="type" formControlName="vecantSeats">
+            <mat-option *ngFor="let seat of seats" [value]="seat">
+              {{seat}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Hour</mat-label>
+          <input required type="number" min="1" max="24" matInput formControlName="hour">
+        </mat-form-field>
+        <span class="padding-left-10">:</span>
+        <mat-form-field>
+          <mat-label>Min</mat-label>
+          <input required type="number" min="1" max="60" class="padding-left-10" matInput
+                 formControlName="min">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>PickUp Point</mat-label>
+          <input required matInput formControlName="pickUpPoint">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Destination</mat-label>
+          <input required matInput formControlName="destination">
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="float-right" [disabled]="rideForm.invalid" (click)="addRide()">Add
+      Ride
+    </button>
+  </mat-card-actions>
+</mat-card>
+<mat-card>
+
+</mat-card>-->

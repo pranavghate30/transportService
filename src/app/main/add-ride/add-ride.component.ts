@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TransportServiceService } from 'src/services/transport-service.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 export interface rideDetails {
   id: string,
   employee_name: string,
@@ -12,6 +12,7 @@ export interface rideDetails {
   destination: string,
   state: string;
 }
+
 @Component({
   selector: 'app-add-ride',
   templateUrl: './add-ride.component.html',
@@ -24,7 +25,11 @@ export class AddRideComponent implements OnInit {
   seats: any = [];
   rideForm: FormGroup;
   loggedUser: any = {};
-  constructor() { }
+
+  @Output() addedRides = new EventEmitter<any>();
+
+  constructor() {
+  }
 
   ngOnInit() {
     this.rideForm = new FormGroup({
@@ -48,9 +53,8 @@ export class AddRideComponent implements OnInit {
   }
 
   addRide() {
-    if (localStorage.getItem('loggedInUser')) {
-      this.loggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
-      console.log(this.loggedUser);
+    if (sessionStorage.getItem('loggedInUser')) {
+      this.loggedUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
     }
     let rideDet: rideDetails = {
       id: this.loggedUser.id,
@@ -62,7 +66,7 @@ export class AddRideComponent implements OnInit {
       pickUpPoint: this.rideForm.get('pickUpPoint').value,
       destination: this.rideForm.get('destination').value,
       state: ''
-    }
+    };
     let index = this.availableRides.findIndex(ride => (ride.id === rideDet.id && ride.time === rideDet.time && ride.vehicleType === rideDet.vehicleType));
     if (index !== -1) {
       alert('Ride already exist');
@@ -71,8 +75,9 @@ export class AddRideComponent implements OnInit {
       if (localStorage.getItem('RideDetails')) {
         this.availableRides = JSON.parse(localStorage.getItem('RideDetails'));
       }
-      this.availableRides.push(rideDet)
+      this.availableRides.push(rideDet);
       localStorage.setItem('RideDetails', JSON.stringify(this.availableRides));
+      this.addedRides.emit();
       this.ngOnInit();
       alert('Shared your ride details');
     }

@@ -1,0 +1,65 @@
+<div class="availableRides">
+  <div class="cardTitle">
+    Available Rides:
+  </div>
+  <div class="cardSubTitle">
+    <label for="filter"><b>Vehicle Type</b></label>
+    <select name="filter" id="filter" class="filter" [formControl]='filterVal' (change)="filterData()">
+      <option value="">All</option>
+      <option value="Bike">Bike</option>
+      <option value="Car">Car</option>
+    </select>
+  </div>
+  <table class="availableRideTable">
+    <tr class="tableHeadRow">
+      <th class="tableHeaders" *ngFor="let head of headers">
+        {{head}}
+      </th>
+    </tr>
+    <tr *ngFor="let ride of availableRides">
+      <td>
+        {{ride.vehicleType}}
+      </td>
+      <td>
+        {{ride.vecantSeats === 0? 'Full' : ride.vecantSeats}}
+      </td>
+      <td>
+        {{ride.time}}
+      </td>
+      <td>
+        {{ride.pickUpPoint}}
+      </td>
+      <td>
+        {{ride.destination}}
+      </td>
+      <td>
+        <button *ngIf="ride.state == ''" class="bookBtn" (click)="bookRide(ride)">Book
+        </button>
+        <button *ngIf="ride.state == 'booked'" class="cancelBtn" (click)="cancelRide(ride)">Cancel
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="availableRides.length == 0">
+      <td class="errorMsg" colspan="6">No Rides Available</td>
+    </tr>
+  </table>
+</div>
+<aside class="MyRideDetails" *ngIf="loggedUser.ongoingRide.hasOwnProperty('state')">
+  <div class="cardTitle">
+    Booked Ride:
+  </div>
+  <div class="container">
+    <div class="dataContainer">
+      <span class="label">Employee ID :</span>
+      <span class="value">{{loggedUser.id}}</span>
+    </div>
+    <div class="dataContainer">
+      <span class="label">Employee Name :</span>
+      <span class="value">{{loggedUser.employee_name}}</span>
+    </div>
+    <div class="dataContainer">
+      <span class="label">Time :</span>
+      <span class="value">{{loggedUser.ongoingRide.time}}</span>
+    </div>
+  </div>
+</aside>

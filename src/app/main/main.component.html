@@ -1,0 +1,11 @@
+<nav>
+  <button class="addRideButton" routerLink="main/dashboard"
+          [queryParams]="{action: 'addRide'}" *ngIf="loggedUser.type === 'Give'">
+    Add a Ride
+  </button>
+  <ul>
+    <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+    <li class="active"><a routerLinkActive="active" routerLink="main/dashboard">Home</a></li>
+  </ul>
+</nav>
+<router-outlet #o="outlet"></router-outlet>

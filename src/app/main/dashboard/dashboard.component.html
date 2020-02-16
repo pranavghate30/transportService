@@ -1,0 +1,39 @@
+<div class="BookedRides" *ngIf="loggedUser.type == 'Give'">
+  <div class="cardTitle">
+    My Ride Pickups:
+  </div>
+  <table class="bookedRidesTable">
+    <tr class="tableHeadRow">
+      <th class="tableHeaders" *ngFor="let head of headers">
+        {{head}}
+      </th>
+    </tr>
+    <tr *ngFor="let ride of myRides">
+      <td>
+        {{ride.id}}
+      </td>
+      <td>
+        <span ngClass="{error: ride.vecantSeats === 0}">{{ride.vecantSeats === 0 ? 'Full' : ride.vecantSeats}}</span>
+      </td>
+      <td>
+        {{ride.time}}
+      </td>
+      <td>
+        {{ride.pickUpPoint}}
+      </td>
+      <td>
+        <button class="deleteBtn" (click)="deleteRide(ride)">Delete </button>
+      </td>
+    </tr>
+    <tr *ngIf="myRides.length === 0">
+      <td class="errorMsg" colspan="5">No Rides Set</td>
+    </tr>
+  </table>
+</div>
+<aside class="addRide" *ngIf="action ==='addRide'">
+  <app-add-ride (addedRides)="refreshMyRides($event)"></app-add-ride>
+</aside>
+
+<div class="showRides" *ngIf="loggedUser.type == 'Get'">
+  <app-show-all-rides></app-show-all-rides>
+</div>
