@@ -31,7 +31,7 @@
   </table>
 </div>
 <aside class="addRide" *ngIf="action ==='addRide'">
-  <app-add-ride (addedRides)="refreshMyRides($event)"></app-add-ride>
+  <app-add-ride (addedRides)="refreshMyRides()"></app-add-ride>
 </aside>
 
 <div class="showRides" *ngIf="loggedUser.type == 'Get'">
